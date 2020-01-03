@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "{{cookiecutter.project_slug}}"
+version = "0.1.0"
+description = ""
+authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-cov = "*"
+coverage = "*"
+isort = "*"
+autoflake = "*"
+black = { version = "*", allows-prereleases = true }
+flake8 = "*"
+mypy = "*"
+
+[tool.black]
+line-length = 120
+target_version = ['py37']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+    \.git
+    | \.mypy_cache
+    | \.pytest_cache
+    | htmlcov
+    | build
+  )/
+)
+'''
+
+[tool.isort]
+line_length = 120
+known_first_party = ["{{cookiecutter.project_slug}}", "tests"]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+combine_as_imports = true

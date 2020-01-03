@@ -1,0 +1,6 @@
+{
+    "project_name": "My Python Package",
+    "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '_') }}",
+    "author_name": "author_name",
+    "author_email": "author_email"
+}
