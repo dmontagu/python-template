@@ -13,7 +13,7 @@ pytest-cov = "*"
 coverage = "*"
 isort = "*"
 autoflake = "*"
-black = { version = "*", allows-prereleases = true }
+black = { version = "*", allow-prereleases = true }
 flake8 = "*"
 mypy = "*"
 
