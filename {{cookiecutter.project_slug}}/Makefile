@@ -1,4 +1,5 @@
 .DEFAULT_GOAL := help
+SHELL = /bin/bash
 
 pkg_src = {{cookiecutter.project_slug}}
 tests_src = tests
