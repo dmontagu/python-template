@@ -6,5 +6,8 @@ cd "${PROJECT_ROOT}"
 
 set -x
 poetry lock
+# Without development dependencies:
 poetry export -f requirements.txt >requirements_tmp.txt
+# With development dependencies:
+# poetry export --dev -f requirements.txt >requirements_tmp.txt
 mv requirements_tmp.txt requirements.txt
