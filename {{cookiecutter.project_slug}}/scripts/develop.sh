@@ -50,4 +50,9 @@ poetry install
 { set +x; } 2>/dev/null
 echo ""
 echo "Virtual environment interpreter installed at:"
-poetry run python -c "import sys; print(sys.executable)"
+# This approach works better than python -c with Windows:
+poetry run python - <<END
+import sys
+print(sys.executable)
+END
+

@@ -11,3 +11,8 @@ poetry export -f requirements.txt >requirements_tmp.txt
 # With development dependencies:
 # poetry export --dev -f requirements.txt >requirements_tmp.txt
 mv requirements_tmp.txt requirements.txt
+
+
+# Also generate a version without hashes for use by static tools that don't handle hashes well
+poetry export -f requirements.txt --without-hashes >requirements_tmp.txt
+mv requirements_tmp.txt requirements-no-hash.txt

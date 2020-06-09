@@ -21,25 +21,29 @@ static: format lint mypy
 
 .PHONY: test  ## Run tests
 test:
-	$(test)
+	poetry run $(test)
 
 .PHONY: format  ## Auto-format the source code (isort, autoflake, black)
 format:
-	$(isort)
-	$(autoflake) -i
-	$(black)
+	poetry run $(isort)
+	poetry run $(autoflake) -i
+	poetry run $(black)
 
 .PHONY: lint  ## Run flake8 over the application source and tests
 lint:
-	$(flake8)
+	poetry run $(flake8)
 
 .PHONY: mypy  ## Run mypy over the application source and tests
 mypy:
-	$(mypy)
+	poetry run $(mypy)
+
+.PHONY: imports  ## Check for undefined imports or package-level cyclic imports
+imports:
+	poetry run python {{cookiecutter.project_slug}}/util/check_imports.py {{cookiecutter.project_slug}} --display
 
 .PHONY: testcov  ## Run tests, generate a coverage report, and open in browser
 testcov:
-	$(test)
+	poetry run $(test)
 	@echo "building coverage html"
 	@coverage html
 	@echo "A coverage report was generated at htmlcov/index.html"
@@ -52,10 +56,10 @@ default: test lint mypy check-format
 
 .PHONY: check-format  ## Check the source code format without changes
 check-format:
-	$(isort) --check-only
-	@echo $(autoflake) --check
-	@( set -o pipefail; $(autoflake) --check | (grep -v "No issues detected!" || true) )
-	$(black) --check
+	poetry run $(isort) --check-only
+	@echo poetry run $(autoflake) --check
+	@( set -o pipefail; poetry run $(autoflake) --check | (grep -v "No issues detected!" || true) )
+	poetry run $(black) --check
 
 .PHONY: clean  ## Remove temporary and cache files/directories
 clean:
@@ -85,25 +89,25 @@ develop:
 
 .PHONY: docs-build  ## Generate the docs and update README.md
 docs-build:
-	python -m mkdocs build
+	poetry run python -m mkdocs build
 	cp ./docs/index.md ./README.md
 	cp ./docs/contributing.md ./CONTRIBUTING.md
 
 .PHONY: docs-build-ci  ## Generate the docs and check README.md is up-to-date
 docs-build-ci:
-	python -m mkdocs build
+	poetry run python -m mkdocs build
 	cmp README.md docs/index.md
 	cmp CONTRIBUTING.md docs/contributing.md
 
 .PHONY: docs-format  ## Format the python code that is part of the docs
 docs-format:
-	isort -rc $(docs_src)
-	autoflake -r --remove-all-unused-imports --ignore-init-module-imports $(docs_src) -i
-	black -l 82 $(docs_src)
+	poetry run isort -rc $(docs_src)
+	poetry run autoflake -r --remove-all-unused-imports --ignore-init-module-imports $(docs_src) -i
+	poetry run black -l 82 $(docs_src)
 
 .PHONY: docs-live  ## Serve the docs with live reload as you make changes
 docs-live:
-	mkdocs serve --dev-addr 0.0.0.0:8008
+	poetry run mkdocs serve --dev-addr 0.0.0.0:8008
 
 .PHONY: version  ## Bump the version in both pyproject.toml and __init__.py (usage: `make version version=minor`)
 version: poetryversion

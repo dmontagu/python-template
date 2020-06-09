@@ -4,7 +4,8 @@ Run plain `make` to see command documentation
 
 -----
 
-To generate a package from this project's template, run:
+This project was generated using
+[cookiecutter](https://github.com/cookiecutter/cookiecutter):
 ```bash
-cookiecutter <git_repositry_url>
+cookiecutter https://github.com/dmontagu/python-template.git
 ```

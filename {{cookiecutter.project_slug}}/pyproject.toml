@@ -16,6 +16,8 @@ autoflake = "*"
 black = { version = "*", allow-prereleases = true }
 flake8 = "*"
 mypy = "*"
+impulse = { version = "*", allow-prereleases = true }
+networkx = "*"
 
 [tool.black]
 line-length = 120
